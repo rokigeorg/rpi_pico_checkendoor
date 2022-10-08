@@ -14,6 +14,8 @@ import framebuf
 # Load RTC lib
 from driver.ds3231 import *
 
+I2C_SDA_PIN = 20
+I2C_SCL_PIN = 21
 
 ######### GLOBALS #########
 rtc_g = None
@@ -24,10 +26,10 @@ push_btn_add_g = None
 
 ######## FUNCTIONS ########
 def init_rtc():
-    return RTC(sda_pin=20, scl_pin=21)
+    return RTC(sda_pin=I2C_SDA_PIN, scl_pin=I2C_SCL_PIN)
     
 def init_i2c():
-    return I2C(0, scl=Pin(21), sda=Pin(20))
+    return I2C(0, scl=Pin(I2C_SCL_PIN), sda=Pin(I2C_SDA_PIN))
 
     
 def get_time(rtc):
