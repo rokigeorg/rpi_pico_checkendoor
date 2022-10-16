@@ -1,13 +1,11 @@
 from machine import Pin, Timer
 import utime
 ######### DEFINES #########
-ENTER_BTN_GPIO = 13
-ADD_BTN_GPIO = 15
+PUSH_BTN_ENTER_GPIO = 13
+PUSH_BTN_ADD_GPIO = 15
 
 
 ###### Global Varibles ######
-
-
 
 
 ##### Test LED ########
@@ -63,7 +61,7 @@ def check_button_pressed(push_button):
 
 def init_buttons():
 
-    enter_btn_g = PushButton("ENTER", ENTER_BTN_GPIO)
-    add_btn_g = PushButton("ADD", ADD_BTN_GPIO)
+    enter_btn_g = PushButton("ENTER", PUSH_BTN_ENTER_GPIO)
+    add_btn_g = PushButton("ADD", PUSH_BTN_ADD_GPIO)
     
     return enter_btn_g, add_btn_g
