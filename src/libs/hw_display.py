@@ -1,6 +1,7 @@
 from machine import Pin, I2C, Timer
 
 from driver.ssd1306 import SSD1306_I2C
+import framebuf
 
 #### DEFINES ######
 WIDTH=128
