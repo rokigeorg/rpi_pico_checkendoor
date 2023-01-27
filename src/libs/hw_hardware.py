@@ -23,3 +23,6 @@ class Hardware(object):
         self.rtc = rtc_instance
         self.i2c = i2c_instance
         self.display = display_instance
+        
+    def set_rtc(self):
+        self.rtc.SetTime(b'\x00\x30\x18\x06\x12\x01\x23')
