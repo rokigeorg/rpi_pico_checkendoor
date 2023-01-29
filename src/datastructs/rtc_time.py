@@ -11,11 +11,15 @@ class RtcTimeModel:
     one second before midnight 23:59:59
     midnight time              00:00:00
     '''
-    
+
     def __init__(self):
         self.seconds = 0
         self.minutes = 0
         self.hour = 0
+    
+
+    def __str__(self):
+        return  str(self.__class__) + '\n'+ '\n'.join(('{} = {}'.format(item, self.__dict__[item]) for item in self.__dict__))
         
         
     def set_seconds(self, seconds):
@@ -34,7 +38,7 @@ class RtcTimeModel:
     def set_hours(self, hours):
         if hours < 0 or hours > 23:
             hours = 0
-        self.hours = hours
+        self.hour = hours
 
 
     def add_to_seconds(self, x):
@@ -59,16 +63,26 @@ class RtcTimeModel:
         return bytes.fromhex(s)
 
 
+class RtcMenuModes:
+    MODE_SECONDS = 0
+    MODE_MINUTES = 1
+    MODE_HOURS = 2
 
-class RtcMenuModel:
+
+class RtcMenuModel(RtcMenuModes):
     '''
     Holds the data for the sub-menu to set the RTC.
     '''
-
+    
     def __init__(self):
         # possible modes are seconds | minutes | hours
-        self.modis = ("seconds", "minutes", "hours")
-        self.current_mode = 0
+        # TODO delete self.modis = ("seconds", "minutes", "hours")
+        self.current_mode = self.MODE_SECONDS
+        self.modes = (self.MODE_SECONDS, self.MODE_MINUTES, self.MODE_HOURS)
+        
+    
+    def __str__(self):
+        return  str(self.__class__) + '\n'+ '\n'.join(('{} = {}'.format(item, self.__dict__[item]) for item in self.__dict__))
 
 
     def get_current_mode(self):
@@ -77,7 +91,10 @@ class RtcMenuModel:
 
     def update_mode(self, mode_index):
         # Make sure index does not over shoot modis array
-        if mode_index > 2:
-            mode_index = 0
+        if mode_index > self.MODE_HOURS:
+            mode_index = self.MODE_SECONDS
         self.current_mode = mode_index
-        
+    
+
+    def next_mode(self):
+        self.update_mode((self.current_mode) + 1)
