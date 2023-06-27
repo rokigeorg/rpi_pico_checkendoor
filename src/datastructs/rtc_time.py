@@ -57,10 +57,17 @@ class RtcTimeModel:
 
 
     # TODO move this to RtcController class in hw_rtc.py
-    def get_binary_rtc_time():
+    def get_binary_rtc_time(self):
         #creates the binary string with hex e.g. b'\x00\x23\x12\x28\x14\x07\x21'
         s = str(self.seconds) + str(self.minutes) + str(self.hour) + '00000000'
         return bytes.fromhex(s)
+
+
+    def get_hh_mm_ss(self):
+        return str(self.hour) + ':' + str(self.minutes) + ':' + str(self.seconds)
+
+
+
 
 
 class RtcMenuModes:

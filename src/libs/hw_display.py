@@ -1,6 +1,7 @@
 from machine import Pin, I2C, Timer
 
 from driver.ssd1306 import SSD1306_I2C
+from datastructs.rtc_time import RtcMenuModes
 import framebuf
 
 #### DEFINES ######
@@ -44,15 +45,25 @@ class DisplayUpdater(object, Timer):
         self.hw.display.show()
 
 
-    def show_rtc_submenu_screen(self):
-        self.hw.display.fill(0)
-        self.hw.display.text('...................', 0, 0, 1)
-        self.hw.display.text('Set RTC Submenu', 0, 10, 1)
-        self.hw.display.text('...................', 0, 18, 1)
-        self.hw.display.text('ss:mm:hh',6, 20, 1)
-        self.hw.display.show()
-        # TODO add ss:mm:hh values
+    def show_rtc_submenu_screen(self, hh_mm_ss, submenu_mode):
+        description_line =''
+        if submenu_mode == RtcMenuModes.MODE_SECONDS:
+            description_line = '(hh:mm:SS)'
+        elif submenu_mode == RtcMenuModes.MODE_MINUTES:
+            description_line = '(hh:MM:ss)'
+        elif submenu_mode == RtcMenuModes.MODE_HOURS:
+            description_line = '(HH:mm:ss)'
+        else:
+            # Should never happen
+            pass
 
+        self.hw.display.fill(0)
+        self.hw.display.text('................', 0, 0, 1)
+        self.hw.display.text('Set RTC Submenu', 0, 10, 1)
+        self.hw.display.text('................', 0, 18, 1)
+        self.hw.display.text(description_line, 10, 35, 1)
+        self.hw.display.text(str(hh_mm_ss),23, 44, 1)
+        self.hw.display.show()
 
     
     def update(self):

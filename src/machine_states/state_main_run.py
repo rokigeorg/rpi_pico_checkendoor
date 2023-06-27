@@ -39,7 +39,7 @@ def enter_run_state(context):
     elif check_button_pressed(hw.push_button_enter):
         print("TEST: Enter button")
         #hw.set_rtc()
-        #next_state = "Set_Rtc_State"
+        next_state = "Set_Rtc_State"
         
     elif check_button_pressed(hw.push_button_add):
         print("TEST: Add button")
