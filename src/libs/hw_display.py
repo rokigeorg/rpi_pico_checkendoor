@@ -42,6 +42,18 @@ class DisplayUpdater(object, Timer):
         self.hw.display.text('...................', 0, 34, 1)
         self.hw.display.text(str(hh_mm_ss), 23, 44, 1)
         self.hw.display.show()
+
+
+    def show_rtc_submenu_screen(self):
+        self.hw.display.fill(0)
+        self.hw.display.text('...................', 0, 0, 1)
+        self.hw.display.text('Set RTC Submenu', 0, 10, 1)
+        self.hw.display.text('...................', 0, 18, 1)
+        self.hw.display.text('ss:mm:hh',6, 20, 1)
+        self.hw.display.show()
+        # TODO add ss:mm:hh values
+
+
     
     def update(self):
         rtc_time = self.hw.rtc.ReadTime('time')

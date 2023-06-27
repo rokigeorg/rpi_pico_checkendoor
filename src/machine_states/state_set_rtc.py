@@ -55,16 +55,20 @@ def enter_set_rtc_state(context):
         print(menu_model.get_current_mode())
         print_models([menu_model, rtc_time_model])
         
+        displayUpdater.show_rtc_submenu_screen()
         
     elif check_button_pressed(hw.push_button_add):
-        # On ADD button press, count the sec|min|hour up
+
         mode = menu_model.get_current_mode()
         rtc_time_model = count_up_sec_min_hour(rtc_time_model, mode)
     
-        # TODO Show current rtc-model on display
-        rtc_controller.show()
+        rtc_controller.update_rtc_hardware(rtc_time_model)
         
         print_models([menu_model, rtc_time_model])
+
+        # TODO Show current rtc-model on display
+        # Display update
+        displayUpdater.show_rtc_submenu_screen()
     
     # save models 
     context["rtcMenuModel"] = menu_model
